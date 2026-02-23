@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin Dashboard - User Management</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Dashboard Styles -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h1>Super Admin Dashboard</h1>
+            </div>
+            <div class="user-info">
+                <span id="userEmail"><i class="fa-solid fa-user"></i> Loading...</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <div class="container">
+
+            <!-- Dashboard Title -->
+            <div class="dashboard-title">
+                <h2><i class="fa-solid fa-users"></i> User Management</h2>
+                <button id="addUserBtn" class="btn btn-primary">
+                    <i class="fa-solid fa-user-plus"></i> Add New User
+                </button>
+            </div>
+
+            <!-- Message Display -->
+            <div class="message" id="message"></div>
+
+            <!-- Users Table -->
+            <div class="table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr>
+                            <td colspan="4" class="loading">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Loading users...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-plus"></i> Add New User</h3>
+                <button class="close-btn" onclick="closeAddUserModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="newUserEmail">
+                        <i class="fa-solid fa-envelope"></i> Email Address
+                    </label>
+                    <input type="email" id="newUserEmail" placeholder="Enter email" required />
+                </div>
+                <div class="form-group">
+                    <label for="newUserPassword">
+                        <i class="fa-solid fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="newUserPassword" placeholder="Enter password" required />
+                    <small>Must be at least 8 characters with uppercase, lowercase, and number</small>
+                </div>
+                <div class="form-group" id="roleSelectionGroup">
+                    <label for="newUserRole">
+                        <i class="fa-solid fa-user-shield"></i> Role
+                    </label>
+                    <select id="newUserRole" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <small>Select the role for this user</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Create User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-key"></i> Change Password</h3>
+                <button class="close-btn" onclick="closeChangePasswordModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="changePasswordForm">
+                <input type="hidden" id="changePasswordUserId" />
+                <div class="form-group">
+                    <label for="changePasswordEmail">
+                        <i class="fa-solid fa-envelope"></i> User Email
+                    </label>
+                    <input type="text" id="changePasswordEmail" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">
+                        <i class="fa-solid fa-lock"></i> New Password
+                    </label>
+                    <input type="password" id="newPassword" placeholder="Enter new password" required />
+                    <small>Must be at least 8 characters with uppercase, lowercase, and number</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeChangePasswordModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Update Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Confirm Delete</h3>
+                <button class="close-btn" onclick="closeDeleteModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this user?</p>
+                <p class="delete-email"><strong id="deleteUserEmail"></strong></p>
+                <p class="warning-text">This action cannot be undone!</p>
+            </div>
+            <input type="hidden" id="deleteUserId" />
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">
+                    <i class="fa-solid fa-trash"></i> Delete User
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Logic -->
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>

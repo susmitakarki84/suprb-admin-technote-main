@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin Login - Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Login Styles -->
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2>Super Admin Login</h2>
+            <p>Access the admin dashboard</p>
+
+            <!-- Test Credentials Display -->
+            <div class="test-credentials">
+                <p><strong>Test Credentials:</strong></p>
+                <p><i class="fa-solid fa-envelope"></i> Email: <code>sup_admin_enter@gmail.com</code></p>
+                <p><i class="fa-solid fa-lock"></i> Password: <code>admin1234@ADmin_super_B</code></p>
+            </div>
+
+            <div class="message" id="message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fa-solid fa-envelope"></i> Email Address
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required
+                        autocomplete="email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fa-solid fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required
+                        autocomplete="current-password" />
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <!-- Login Form Logic -->
+    <script src="login.js"></script>
+
+</body>
+
+</html>
