@@ -20,7 +20,7 @@ function validateEmail(email) {
  * @returns {boolean} - True if valid, false otherwise
  */
 function validatePassword(password) {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
     return passwordRegex.test(password);
 }
 

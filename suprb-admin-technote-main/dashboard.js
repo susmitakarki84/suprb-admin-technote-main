@@ -2,8 +2,7 @@
  * Dashboard Logic with Role-Based Access Control
  * Handles user management operations based on user roles
  */
-
-const API_BASE_URL = 'process.env.BACKEND_API';
+const API_BASE_URL = "http://localhost:5000";
 let currentUserRole = '';
 
 // Check authentication on page load

@@ -3,7 +3,7 @@
  * Handles super admin authentication
  */
 
-const API_BASE_URL = '';
+const API_BASE_URL = 'http://localhost:5000';
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();

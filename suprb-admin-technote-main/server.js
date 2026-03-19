@@ -31,6 +31,8 @@ mongoose.connect(process.env.MONGO_URI)
     })
     .catch(err => console.error('❌ MongoDB connection error:', err));
 
+  
+
 // Initialize Super Admin Account
 async function initializeSuperAdmin() {
     try {
@@ -249,7 +251,7 @@ app.put('/api/users/:userId/password', authenticateToken, authorizeRoles('supera
         if (!validatePassword(newPassword)) {
             return res.status(400).json({
                 success: false,
-                message: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number'
+               message: 'Password must be 8–16 characters long and contain at least one uppercase letter, one lowercase letter, and one number'
             });
         }
 
@@ -653,3 +655,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
