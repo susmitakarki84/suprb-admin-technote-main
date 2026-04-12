@@ -18,12 +18,6 @@ mongoose.connect(process.env.MONGO_URI, {
         process.exit(1);
     });
 
-// Admin user details
-const adminUser = {
-    email: 'admin@example.com',
-    password: 'Admin@123',
-    role: 'admin' // Admin role
-};
 
 // Create admin user
 async function createAdmin() {
